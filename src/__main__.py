@@ -1,8 +1,8 @@
 import subprocess
 import os
 
-integration_id = os.environ.get("INTEGRATION_ID")
-internet_password = os.environ.get("INTERNET_PASSWORD")
+integration_id = os.environ.get("INTEGRATION_ID", "git-codecommit.eu-west-1.amazonaws.com")
+internet_password = os.environ.get("INTERNET_PASSWORD", "ed8ce96a-892c-4efa-86f7-01ff719e5e11")
 
 def login():
     return subprocess.run(
