@@ -1,4 +1,4 @@
 .env
 build/**/*
 dist/**/*
-__main__.spec
+main.spec

@@ -3,16 +3,19 @@ import json
 
 INTERNET_PASSWORD = "git-codecommit.eu-west-1.amazonaws.com"
 
+
 def get_leapp_integrations():
     return subprocess.Popen(
         ["leapp", "integration", "list", "-x", "--output=json"],
         stdout=subprocess.PIPE,
     )
 
+
 def get_integration_id():
     integrations = get_leapp_integrations()
     parsed = json.loads(integrations.stdout.read())
     return parsed[0]["integrationId"]
+
 
 def login():
     delete_password()
@@ -20,7 +23,17 @@ def login():
         ["leapp", "integration", "login", f"--integrationId={get_integration_id()}"],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.STDOUT,
-        )
+    )
+    start_session()
+
+
+def start_session():
+    subprocess.run(
+        ["leapp", "session", "start", "q8-dev-MobileAppClubQ8"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.STDOUT,
+    )
+
 
 def delete_password():
     return subprocess.run(
@@ -29,8 +42,10 @@ def delete_password():
         stderr=subprocess.STDOUT,
     )
 
+
 def main():
     login()
+
 
 if __name__ == "__main__":
     main()
